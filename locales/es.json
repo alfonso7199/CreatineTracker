@@ -1,0 +1,49 @@
+{
+  "app": {
+    "title": "Creatine Tracker",
+    "dateFormat": "EEEE, d 'de' MMMM, yyyy"
+  },
+  "home": {
+    "todayTaken": "Tomada Hoy",
+    "todayNotTaken": "Tomar Creatina",
+    "monthlyProgress": "Progreso Mensual",
+    "daysTracked": "Días Registrados",
+    "completion": "Completado",
+    "reminders": "Recordatorios"
+  },
+  "calendar": {
+    "weekdays": ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
+  },
+  "about": {
+    "title": "Acerca de",
+    "whatIsCreatine": {
+      "title": "¿Qué es la Creatina?",
+      "paragraph1": "La creatina es uno de los suplementos más investigados en la industria del fitness. Aumenta la recuperación muscular y de forma más anecdótica ayuda a aumentar la fuerza, la masa muscular y el rendimiento del ejercicio proporcionando energía a tus músculos.",
+      "paragraph2": "La ingesta regular es clave para mantener niveles óptimos de creatina en tus músculos. Por eso creamos esta aplicación - para ayudarte a seguir tu consumo diario y nunca olvidar una dosis."
+    },
+    "howToUse": {
+      "title": "Cómo Usar",
+      "step1Title": "1. Seguimiento Diario",
+      "step1Desc": "Toca el botón en la pantalla principal cada vez que tomes tu creatina.",
+      "step2Title": "2. Configura Recordatorios",
+      "step2Desc": "Activa las notificaciones para recordarte tomar tu suplemento.",
+      "step3Title": "3. Seguimiento de Progreso",
+      "step3Desc": "Visualiza tu calendario mensual para ver tu consistencia."
+    },
+    "dosage": {
+      "title": "Dosis Recomendada",
+      "paragraph": "La dosis estándar de creatina monohidratada es de 1 gramo por cada 10Kg de peso corporal al día. Aunque hay gente que toma un scoop, unos 5g, y ya. No hay necesidad de una fase de carga, aunque algunas personas prefieren comenzar con una dosis más alta de 20g por día (dividida en 4 porciones) durante la primera semana.",
+      "disclaimer": "Nota: Esta aplicación no proporciona consejos médicos. Siempre consulta con un profesional de la salud antes de comenzar cualquier régimen de suplementos."
+    },
+    "actions": {
+      "shareApp": "Share App",
+      "supportUs": "Apóyanos",
+      "learnMore": "Aprende más sobre la creatina en Examine.com"
+    },
+    "footer": {
+      "version": "Creatine Tracker v1.0.0",
+      "madeWith": "Hecho con",
+      "by": "por SonolDev"
+    }
+  }
+} 

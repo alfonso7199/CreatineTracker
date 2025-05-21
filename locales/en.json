@@ -1,0 +1,49 @@
+{
+  "app": {
+    "title": "Creatine Tracker",
+    "dateFormat": "EEEE, MMMM d, yyyy"
+  },
+  "home": {
+    "todayTaken": "Taken Today",
+    "todayNotTaken": "Take Creatine",
+    "monthlyProgress": "Monthly Progress",
+    "daysTracked": "Days Tracked",
+    "completion": "Completion",
+    "reminders": "Reminders"
+  },
+  "calendar": {
+    "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  },
+  "about": {
+    "title": "About",
+    "whatIsCreatine": {
+      "title": "What is Creatine?",
+      "paragraph1": "Creatine is one of the most researched supplements in the fitness industry. It helps increase strength, muscle mass, and exercise performance by providing energy to your muscles.",
+      "paragraph2": "Regular intake is key to maintaining optimal creatine levels in your muscles. That's why we created this app - to help you track your daily intake and never miss a dose."
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "step1Title": "1. Daily Tracking",
+      "step1Desc": "Tap the button on the home screen each time you take your creatine.",
+      "step2Title": "2. Set Reminders",
+      "step2Desc": "Enable notifications to remind you to take your supplement.",
+      "step3Title": "3. Track Progress",
+      "step3Desc": "View your monthly calendar to see your consistency."
+    },
+    "dosage": {
+      "title": "Recommended Dosage",
+      "paragraph": "The standard dosage for creatine monohydrate is 3-5 grams per day. There's no need for a loading phase, though some people prefer to start with a higher dose of 20g per day (split into 4 servings) for the first week.",
+      "disclaimer": "Note: This app does not provide medical advice. Always consult with a healthcare professional before starting any supplement regimen."
+    },
+    "actions": {
+      "shareApp": "Share App",
+      "supportUs": "Support Us",
+      "learnMore": "Learn more about creatine at Examine.com"
+    },
+    "footer": {
+      "version": "Creatine Tracker v1.0.0",
+      "madeWith": "Made with",
+      "by": "by fitness enthusiasts"
+    }
+  }
+}
