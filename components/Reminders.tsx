@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Switch, ScrollView, TouchableOpacity, Platform } from 'react-native';
-import { Typography } from './Typography';
-import { useTheme } from '../constants/Theme';
 import { Feather } from '@expo/vector-icons';
-import Animated, { useAnimatedStyle, withTiming, withSpring, withSequence, Easing } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Notifications from 'expo-notifications';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import * as Notifications from 'expo-notifications';
+import React, { useEffect, useState } from 'react';
+import { Platform, ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
+import Animated, { Easing, useAnimatedStyle, withSequence, withSpring, withTiming } from 'react-native-reanimated';
+import { useTheme } from '../constants/Theme';
+import { Typography } from './Typography';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -47,9 +47,7 @@ export default function Reminders() {
   useEffect(() => {
     const saveReminders = async () => {
       await AsyncStorage.setItem('reminders', JSON.stringify(reminders));
-      if (reminders.some(r => r.enabled)) {
-        await updateNotifications();
-      }
+      await updateNotifications();
     };
 
     const debounce = setTimeout(saveReminders, 500);
@@ -63,52 +61,53 @@ export default function Reminders() {
   };
 
   const updateNotifications = async () => {
+    // Cancelar todas primero
     await Notifications.cancelAllScheduledNotificationsAsync();
 
     const { status } = await Notifications.getPermissionsAsync();
     if (status !== 'granted') return;
 
+    // Solo reprogramar las que están activas
     for (const reminder of reminders) {
-      if (reminder.enabled) {
-        try {
-          const triggerDate = new Date(reminder.time);
-          const now = new Date();
+      if (!reminder.enabled) continue;
 
-          if (triggerDate.getTime() < now.getTime()) {
-            triggerDate.setDate(triggerDate.getDate() + 1);
-          }
+      try {
+        // Extraer hora y minutos del timestamp
+        const timeDate = new Date(reminder.time);
+        const hour = timeDate.getHours();
+        const minute = timeDate.getMinutes();
 
-          let trigger: Notifications.NotificationTriggerInput;
-          if (Platform.OS === 'ios') {
-            trigger = {
-              type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-              hour: triggerDate.getHours(),
-              minute: triggerDate.getMinutes(),
-              repeats: true,
-              timezone: 'local'
-            } as Notifications.CalendarTriggerInput;
-          } else {
-            trigger = {
-              type: Notifications.SchedulableTriggerInputTypes.DAILY,
-              hour: triggerDate.getHours(),
-              minute: triggerDate.getMinutes(),
-              channelId: 'reminders'
-            } as Notifications.DailyTriggerInput;
-          }
-
-          await Notifications.scheduleNotificationAsync({
-            content: {
-              title: reminder.title,
-              body: '¡Es hora de tomar tu creatina!',
-              sound: 'default',
-              priority: Notifications.AndroidNotificationPriority.HIGH,
-            },
-            trigger
-          });
-
-        } catch (error) {
-          console.error('Error al programar:', error);
+        let trigger: Notifications.NotificationTriggerInput;
+        if (Platform.OS === 'ios') {
+          trigger = {
+            type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
+            hour,
+            minute,
+            repeats: true,
+          } as Notifications.CalendarTriggerInput;
+        } else {
+          trigger = {
+            type: Notifications.SchedulableTriggerInputTypes.DAILY,
+            hour,
+            minute,
+            channelId: 'reminders'
+          } as Notifications.DailyTriggerInput;
         }
+
+        const notificationId = await Notifications.scheduleNotificationAsync({
+          content: {
+            title: reminder.title,
+            body: '¡Es hora de tomar tu creatina!',
+            sound: 'default',
+            priority: Notifications.AndroidNotificationPriority.HIGH,
+          },
+          trigger
+        });
+
+        console.log(`Notificación programada ${notificationId} para las ${hour}:${minute.toString().padStart(2, '0')}`);
+
+      } catch (error) {
+        console.error('Error al programar notificación:', error);
       }
     }
   };
@@ -176,16 +175,11 @@ function ReminderItem({ id, time, enabled, onToggle, onTimeChange, showPicker, s
 
   const handleTimePicker = (_event: DateTimePickerEvent, selectedDate?: Date) => {
     if (selectedDate) {
-      const now = new Date();
-      const newTime = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        selectedDate.getHours(),
-        selectedDate.getMinutes()
-      ).getTime();
+      // Guardar solo la hora y minutos como timestamp desde epoch 0
+      const newTime = new Date(0);
+      newTime.setHours(selectedDate.getHours(), selectedDate.getMinutes(), 0, 0);
 
-      onTimeChange(id, newTime);
+      onTimeChange(id, newTime.getTime());
     }
     setShowPicker(null);
   };

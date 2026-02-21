@@ -2,7 +2,7 @@
   "expo": {
     "name": "Creatine Calendar",
     "slug": "CretineCalendar",
-    "version": "1.0.0",
+    "version": "1.3.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "creatinecalendar",
@@ -36,7 +36,10 @@
         }
       ],
       "expo-font",
-      "expo-localization"
+      "expo-localization",
+      "@react-native-community/datetimepicker",
+      "expo-web-browser",
+      "./plugins/withArm64Only.js"
     ],
     "experiments": {
       "typedRoutes": true
